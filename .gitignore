@@ -2,3 +2,4 @@
 __pycache__/
 ai/index.json
 *.pyc
+.gstack/
