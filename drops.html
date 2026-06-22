@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Drops & Raffles · THATS OC CLT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="assets/oc-logo.png" />
+<link rel="stylesheet" href="assets/site.css" />
+
+</head>
+<body>
+
+<div class="ticker center">DROP 014 · VALENTINE'S DUNK RAFFLE LIVE · NO BOTS · WINNERS CHARGED ONLY WHEN DRAWN</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="assets/oc-logo.png" alt="THATS OC CLT"></a>
+    <div class="links"><a href="collection.html">Sneakers</a><a href="drops.html">Drops</a><a href="collection.html">Apparel</a><a href="collection.html">Brands</a><a href="index.html#city">The City</a></div>
+    <div class="r"><button data-search>Search</button><a href="#" class="bag">Bag (0)</a></div>
+  </div>
+</header>
+
+<section class="colhead">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">HOME</a> / <b>DROPS & RAFFLES</b></div>
+    <h1>The <em>Drop</em></h1>
+    <p>Limited pairs, fair shot. Enter the raffle — no bots, no resold spots, winners charged only when drawn.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="drop-hero">
+    <div class="img"><span class="tagline">★ Live now · 88 entries</span><img src="assets/pair.jpg" alt="Valentine's Dunk"></div>
+    <div class="info">
+      <div class="eyebrow"><span class="live-dot"></span><span class="eyebrow">Drop 014 · Raffle</span></div>
+      <h1>Dunk Low<br><em>"Valentine's Day"</em></h1>
+      <div class="meta">Nike SB · Women's · DS · retail-priced for winners</div>
+      <div class="cdown" id="cd">
+        <div class="u"><b id="cd-d">02</b><small>Days</small></div>
+        <div class="u"><b id="cd-h">14</b><small>Hrs</small></div>
+        <div class="u"><b id="cd-m">37</b><small>Min</small></div>
+        <div class="u"><b id="cd-s">09</b><small>Sec</small></div>
+      </div>
+      <form class="raffle" id="raffleForm">
+        <div class="rrow">
+          <input type="email" id="rEmail" placeholder="Email to enter" required>
+          <select id="rSize" required>
+            <option value="">Size</option>
+            <option>US 6W</option><option>US 7W</option><option>US 8W</option><option>US 9W</option><option>US 10W</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-buy">Enter raffle — free →</button>
+        <div class="ent">One entry per person · local winners can cop at the Plaza meetup</div>
+      </form>
+      <div class="entered" id="entered" style="display:none">
+        <div class="t">You're <em>in</em>.</div>
+        <p>Entry confirmed. We draw Friday 8PM ET and email winners instantly — winners only get charged.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" style="padding:30px 0 60px">
+    <div class="sec-head"><h2>How drops <em>work</em></h2></div>
+    <div class="steps">
+      <div class="st"><div class="n">01</div><h4>Enter the raffle</h4><p>Drop your email + size. Free, one entry each. No bots get through — the queue is verified.</p></div>
+      <div class="st"><div class="n">02</div><h4>We draw fair</h4><p>Winners pulled at random when the timer hits zero. You're only charged if you're drawn — no holds, no spots resold.</p></div>
+      <div class="st"><div class="n">03</div><h4>Ship or meet</h4><p>Winners get the authenticated pair shipped fast, or cop it in person at a Plaza Midwood meetup.</p></div>
+    </div>
+
+    <div class="sec-head" style="margin-top:20px"><h2>Up <em>next</em></h2><a href="collection.html" class="link">Shop in-stock →</a></div>
+    <div class="upcoming">
+      <a href="drops.html" class="uc"><div class="ph"><span class="when">This Friday</span><img src="assets/sn_159704.jpg" alt=""></div><div class="m"><div class="nm">AJ1 High "Chicago"</div><div class="s">Drop 015 · Raffle</div></div></a>
+      <a href="drops.html" class="uc"><div class="ph"><span class="when">Next week</span><img src="assets/sn_155148.jpg" alt=""></div><div class="m"><div class="nm">Yeezy 350 "Cream"</div><div class="s">Drop 016 · FCFS</div></div></a>
+      <a href="drops.html" class="uc"><div class="ph"><span class="when">TBA</span><img src="assets/sn_157811.jpg" alt=""></div><div class="m"><div class="nm">AJ1 High "Royal"</div><div class="s">Drop 017 · Exclusive access</div></div></a>
+    </div>
+  </section>
+</div>
+
+<footer class="mini"><div class="big">Thats OC <em>CLT</em></div><p>CHARLOTTE, NC · QUEEN CITY · EVERY PAIR AUTHENTICATED IN HAND</p></footer>
+
+<script src="assets/concierge-widget.js"></script>
+<script src="assets/cart.js"></script>
+<script src="assets/search.js"></script>
+<script>
+(function(){
+  // live countdown to next Friday 8pm
+  function pad(n){return (n<10?'0':'')+n;}
+  var target=new Date(); var day=target.getDay(); var add=(5-day+7)%7; if(add===0&&target.getHours()>=20)add=7;
+  target.setDate(target.getDate()+add); target.setHours(20,0,0,0);
+  function tick(){
+    var diff=Math.max(0,target-new Date());
+    var d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+    var E=function(id,v){var el=document.getElementById(id);if(el)el.textContent=pad(v);};
+    E('cd-d',d);E('cd-h',h);E('cd-m',m);E('cd-s',s);
+  }
+  tick(); setInterval(tick,1000);
+  document.getElementById('raffleForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!document.getElementById('rEmail').value||!document.getElementById('rSize').value) return;
+    this.style.display='none'; document.getElementById('entered').style.display='block';
+  });
+})();
+</script>
+</body>
+</html>

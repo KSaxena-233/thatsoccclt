@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Plug · AI Concierge — THATS OC CLT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#F3EFE6; --surface:#FFFFFF; --raise:#FBFAF7;
+  --ink:#1A1714; --muted:#6E6A62; --faint:#9A958C;
+  --line:rgba(22,19,14,.12); --line-2:rgba(22,19,14,.06);
+  --teal:#0E8C82; --teal-ink:#0a6b62; --orange:#F0531C; --green:#1C7A48;
+  --maxw:980px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.mono{font-family:'Space Mono',monospace}
+
+/* top bar */
+header{flex:0 0 auto;background:var(--surface);border-bottom:1px solid var(--line);position:relative;z-index:5}
+.bar{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px 22px}
+.logo{width:42px;height:42px;border-radius:11px;overflow:hidden;flex:0 0 auto;box-shadow:0 1px 0 var(--line)}
+.logo img{width:100%;height:100%;object-fit:cover}
+.brandwrap{display:flex;flex-direction:column;line-height:1.1}
+.brandwrap .nm{font-family:'Fraunces',Georgia,serif;font-weight:800;text-transform:uppercase;font-size:17px;letter-spacing:-.01em}
+.brandwrap .nm em{font-style:normal;color:var(--teal)}
+.brandwrap .sub{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.05em;color:var(--muted)}
+.status{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:7px 13px;background:var(--raise)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(28,122,72,.5);animation:p 2s infinite}
+@keyframes p{0%{box-shadow:0 0 0 0 rgba(28,122,72,.45)}70%{box-shadow:0 0 0 7px rgba(28,122,72,0)}100%{box-shadow:0 0 0 0 rgba(28,122,72,0)}}
+.backlink{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.backlink:hover{color:var(--teal)}
+@media(max-width:620px){.status .txt{display:none}}
+
+/* chat scroll area */
+.scroll{flex:1 1 auto;overflow-y:auto;scroll-behavior:smooth}
+.thread{max-width:var(--maxw);margin:0 auto;padding:30px 22px 16px;display:flex;flex-direction:column;gap:20px}
+
+/* intro hero */
+.intro{text-align:center;padding:26px 0 8px}
+.intro .kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.intro h1{font-family:'Fraunces',Georgia,serif;font-weight:800;text-transform:uppercase;font-size:clamp(30px,5vw,50px);line-height:.95;letter-spacing:-.025em}
+.intro p{color:var(--muted);max-width:440px;margin:14px auto 0;font-size:15px}
+
+/* message rows */
+.row{display:flex;gap:12px;align-items:flex-start;max-width:760px}
+.row.me{align-self:flex-end;flex-direction:row-reverse}
+.av{width:34px;height:34px;border-radius:9px;flex:0 0 auto;overflow:hidden;display:grid;place-items:center;font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:13px}
+.av.bot{background:var(--ink)}.av.bot img{width:100%;height:100%;object-fit:cover}
+.av.me{background:var(--teal);color:#fff}
+.bubble{padding:13px 16px;border-radius:14px;font-size:15px;line-height:1.55}
+.row.bot .bubble{background:var(--surface);border:1px solid var(--line);border-top-left-radius:4px}
+.row.me .bubble{background:var(--ink);color:var(--paper);border-top-right-radius:4px}
+.who{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+
+/* product cards inside a bot msg */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px;max-width:520px}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+.pcard{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:9px;transition:transform .15s,border-color .15s}
+.pcard:hover{transform:translateY(-2px);border-color:var(--teal)}
+.pcard .ph{width:74px;height:74px;border-radius:8px;overflow:hidden;flex:0 0 auto;background:var(--raise)}
+.pcard .ph img{width:100%;height:100%;object-fit:cover}
+.pcard .pi{display:flex;flex-direction:column;min-width:0;justify-content:center}
+.pcard .bl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.pcard .nm{font-weight:600;font-size:12.5px;line-height:1.2;margin:3px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard .pr{display:flex;align-items:baseline;gap:7px}
+.pcard .pr b{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:15px}
+.pcard .pr .mk{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--green)}
+.pcard .sz{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:3px}
+.pcard .auth{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.05em;color:var(--green);margin-top:3px}
+
+/* typing */
+.typing{display:flex;gap:5px;padding:15px 16px}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--faint);animation:b 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes b{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+/* composer */
+.composer{flex:0 0 auto;background:var(--surface);border-top:1px solid var(--line)}
+.cwrap{max-width:var(--maxw);margin:0 auto;padding:14px 22px 18px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:11px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font-family:'Space Mono',monospace;font-size:11.5px;color:var(--muted);background:var(--raise);border:1px solid var(--line);border-radius:30px;padding:8px 13px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.chip:hover{color:#fff;background:var(--teal);border-color:var(--teal)}
+.inputbar{display:flex;gap:10px;align-items:center;background:var(--raise);border:1px solid var(--line);border-radius:14px;padding:6px 6px 6px 16px}
+.inputbar:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,158,146,.12)}
+.inputbar input{flex:1;border:none;background:transparent;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:var(--ink);outline:none}
+.inputbar input::placeholder{color:var(--faint)}
+.send{flex:0 0 auto;width:42px;height:42px;border:none;border-radius:10px;background:var(--ink);color:var(--paper);font-size:17px;cursor:pointer;display:grid;place-items:center;transition:background .15s,transform .15s}
+.send:hover{background:var(--teal);transform:translateY(-1px)}
+.send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.foot{text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--faint);margin-top:10px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="logo"><img src="assets/oc-logo.png" alt="OC"></div>
+    <div class="brandwrap">
+      <span class="nm">The <em>Plug</em></span>
+      <span class="sub">THATS OC CLT · AI concierge</span>
+    </div>
+    <div class="status"><span class="dot"></span><span class="txt">running locally · llama3.2</span></div>
+    <a href="index.html" class="backlink" style="margin-left:14px">← store</a>
+  </div>
+</header>
+
+<div class="scroll" id="scroll">
+  <div class="thread" id="thread">
+    <div class="intro">
+      <div class="kicker">★ ask the plug</div>
+      <h1>What heat<br>you lookin' for?</h1>
+      <p>Tell me your vibe, budget, size, or occasion — I'll pull from what's authenticated and in the building right now.</p>
+    </div>
+  </div>
+</div>
+
+<div class="composer">
+  <div class="cwrap">
+    <div class="chips" id="chips">
+      <span class="chip">Clean white pair under $200</span>
+      <span class="chip">Something pink for my girl, size 8</span>
+      <span class="chip">A grail Jordan 1, money's no object</span>
+      <span class="chip">Comfortable everyday, neutral colors</span>
+      <span class="chip">What's your most slept-on pair?</span>
+    </div>
+    <div class="inputbar">
+      <input id="input" type="text" placeholder="Ask The Plug anything…" autocomplete="off" />
+      <button class="send" id="send">→</button>
+    </div>
+    <div class="foot">grounded only in live, authenticated inventory · powered by Ollama on-prem · no data leaves the shop</div>
+  </div>
+</div>
+
+<script>
+const API = "/chat";
+const thread = document.getElementById('thread');
+const scroll = document.getElementById('scroll');
+const input  = document.getElementById('input');
+const send   = document.getElementById('send');
+let history = [], busy = false, introGone = false;
+
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function toBottom(){ scroll.scrollTop = scroll.scrollHeight; }
+
+function addUser(text){
+  if(!introGone){ document.querySelector('.intro').remove(); introGone=true; }
+  const r=document.createElement('div'); r.className='row me';
+  r.innerHTML=`<div class="av me">YO</div><div><div class="bubble">${esc(text)}</div></div>`;
+  thread.appendChild(r); toBottom();
+}
+function addTyping(){
+  const r=document.createElement('div'); r.className='row bot'; r.id='typing';
+  r.innerHTML=`<div class="av bot"><img src="assets/oc-logo.png" alt=""></div>
+    <div class="bubble" style="padding:0"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  thread.appendChild(r); toBottom();
+}
+function cardsHTML(products){
+  if(!products||!products.length) return '';
+  return `<div class="cards">`+products.map(p=>`
+    <a class="pcard" href="product.html">
+      <div class="ph"><img src="${p.img}" alt=""></div>
+      <div class="pi">
+        <span class="bl">${esc(p.brand)}</span>
+        <span class="nm">${esc(p.name)}</span>
+        <span class="pr"><b>$${p.price}</b><span class="mk">mkt $${p.market}</span></span>
+        <span class="sz">US ${p.size_us} · ${p.condition}</span>
+        <span class="auth">✓ authenticated in CLT</span>
+      </div>
+    </a>`).join('')+`</div>`;
+}
+function addBot(text, products){
+  const r=document.createElement('div'); r.className='row bot';
+  r.innerHTML=`<div class="av bot"><img src="assets/oc-logo.png" alt=""></div>
+    <div><div class="who">The Plug</div><div class="bubble">${esc(text)}${cardsHTML(products)}</div></div>`;
+  thread.appendChild(r); toBottom();
+}
+
+async function ask(text){
+  if(busy||!text.trim()) return;
+  busy=true; send.disabled=true;
+  addUser(text); input.value=''; addTyping();
+  try{
+    const res = await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:text,history})});
+    const data = await res.json();
+    document.getElementById('typing')?.remove();
+    if(data.error){ addBot("My bad — the concierge engine isn't reachable. Make sure Ollama + the local server are running.", []); }
+    else{
+      addBot(data.reply, data.products);
+      history.push({role:'user',content:text});
+      history.push({role:'assistant',content:data.reply});
+    }
+  }catch(e){
+    document.getElementById('typing')?.remove();
+    addBot("Couldn't reach the concierge engine (is concierge.py running on :8799?).", []);
+  }
+  busy=false; send.disabled=false; input.focus();
+}
+
+send.onclick=()=>ask(input.value);
+input.onkeydown=e=>{ if(e.key==='Enter') ask(input.value); };
+document.getElementById('chips').onclick=e=>{ if(e.target.classList.contains('chip')) ask(e.target.textContent); };
+input.focus();
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# DROP YOUR REAL PAIR PHOTOS HERE
+
+Save each as <id>.jpg here, refresh — it replaces the stock image everywhere.
+Shoot on ONE background (white sheet / one wall) for the clean look.
+
+id            file          product
+----------------------------------------------------------------
+oc-014        oc-014.jpg    Dunk Low "Pink Foam" (W)
+oc-021        oc-021.jpg    Air Jordan 1 High "Royal Blue"
+oc-033        oc-033.jpg    Yeezy Boost 350 V2 "Cream"
+oc-040        oc-040.jpg    NB 327 "White / Orange / Blue"
+oc-052        oc-052.jpg    NB 990v6 "Olive / MiUSA"
+oc-058        oc-058.jpg    Air Jordan 1 Mid "Grey / Orange"
+oc-061        oc-061.jpg    Air Force 1 Low "Triple Black"
+oc-067        oc-067.jpg    Air Force 1 '07 "Wheat / Flax"
+oc-070        oc-070.jpg    Dunk Low "Pink / Cream" (W)
+oc-074        oc-074.jpg    Air Force 1 '07 "Easter Pastel" (W)
+oc-081        oc-081.jpg    Air Force 1 Low "Triple White"
+oc-088        oc-088.jpg    Air Jordan 1 High "Chicago"
+oc-093        oc-093.jpg    Air Max 1 "White / Orange"
+oc-097        oc-097.jpg    Air Max "Triple Black"
+oc-101        oc-101.jpg    Zoom Trainer "Volt"
+oc-106        oc-106.jpg    Chuck 70 Hi "Parchment"

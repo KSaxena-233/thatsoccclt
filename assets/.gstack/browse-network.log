@@ -1,0 +1,2 @@
+[2026-06-21T22:30:40.476Z] GET http://localhost:8771/index.html → 404 (4ms, 460B)
+[2026-06-21T22:30:40.543Z] GET http://localhost:8771/index.html → 404 (1ms, 460B)

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout · THATS OC CLT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="assets/oc-logo.png" />
+<link rel="stylesheet" href="assets/site.css" />
+
+</head>
+<body>
+
+<div class="ticker center">SECURE CHECKOUT · AUTHENTICATED IN CLT · SHOP PAY + ALL MAJOR CARDS</div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo"><img src="assets/oc-logo.png" alt="THATS OC CLT"></a>
+    <div class="links"><a href="collection.html">Sneakers</a><a href="drops.html">Drops</a><a href="collection.html">Apparel</a><a href="collection.html">Brands</a><a href="index.html#city">The City</a></div>
+    <div class="r"><button data-search>Search</button><a href="#" class="bag">Bag (0)</a></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">HOME</a> / <a href="collection.html">SHOP</a> / <b>CHECKOUT</b></div>
+
+  <div id="coLive" class="co">
+    <!-- form -->
+    <div>
+      <div class="co-sec">
+        <h3><span class="n">01</span> Contact</h3>
+        <div class="field"><label>Email</label><input type="email" id="email" placeholder="you@email.com"></div>
+        <div class="field"><label>Phone (for meetup / drop alerts)</label><input type="tel" placeholder="(704) 000-0000"></div>
+      </div>
+
+      <div class="co-sec">
+        <h3><span class="n">02</span> Fulfillment</h3>
+        <div class="fulfil">
+          <div class="ftile on" data-fulfil="ship">
+            <div class="t">Ship it</div>
+            <div class="s">Insured · tracked · out same/next day</div>
+          </div>
+          <div class="ftile" data-fulfil="meet">
+            <div class="t">Plaza Meetup</div>
+            <div class="s">Free · Plaza Midwood · cop in person</div>
+          </div>
+        </div>
+        <div id="shipFields">
+          <div class="field"><label>Name</label><input placeholder="Full name"></div>
+          <div class="field"><label>Address</label><input placeholder="Street address"></div>
+          <div class="frow2"><div class="field"><label>City</label><input placeholder="Charlotte"></div><div class="field"><label>ZIP</label><input placeholder="28205"></div></div>
+        </div>
+        <div id="meetFields" style="display:none">
+          <div class="field"><label>Preferred meetup window</label><input placeholder="e.g. Sat afternoon, Plaza Midwood"></div>
+        </div>
+      </div>
+
+      <div class="co-sec">
+        <h3><span class="n">03</span> Payment</h3>
+        <button class="btn-shoppay" id="payBtn">Place order · Shop Pay</button>
+        <div class="reassure" style="text-align:left;margin-top:12px">Demo checkout — no real charge. Shop Pay / Stripe wires in here at launch.</div>
+      </div>
+    </div>
+
+    <!-- summary -->
+    <div class="summary">
+      <h3>Your order</h3>
+      <div id="sumItems"></div>
+      <label class="deposit" id="depToggle"><span class="box"></span><span>Deposit-to-hold instead — put 20% down and we hold the exact pair for you.</span></label>
+      <div class="srow"><span>Subtotal</span><span id="sumSub">$0</span></div>
+      <div class="srow"><span id="shipLbl">Shipping</span><span id="sumShip">$15</span></div>
+      <div class="srow"><span>Authentication</span><span>Included</span></div>
+      <div class="srow tot"><span>Total</span><span class="v" id="sumTot">$0</span></div>
+    </div>
+  </div>
+
+  <div id="coPlaced" class="placed" style="display:none">
+    <h2>You're <em>locked in</em>.</h2>
+    <p id="placedMsg">Order confirmed — every pair authenticated in hand before it moves.</p>
+    <div style="margin-top:24px"><a href="collection.html" class="btn btn-fill">Keep shopping →</a></div>
+  </div>
+</div>
+
+<footer class="mini"><div class="big">Thats OC <em>CLT</em></div><p>CHARLOTTE, NC · QUEEN CITY · EVERY PAIR AUTHENTICATED IN HAND</p></footer>
+
+<script src="assets/concierge-widget.js"></script>
+<script src="assets/cart.js"></script>
+<script src="assets/search.js"></script>
+<script>
+(function(){
+  var cart=[]; try{ cart=JSON.parse(localStorage.getItem('oc_cart'))||[]; }catch(e){}
+  var fulfil='ship', deposit=false;
+  function money(n){return '$'+Number(Math.round(n)).toLocaleString();}
+  function sub(){ return cart.reduce(function(a,b){return a+(+b.price||0);},0); }
+  function render(){
+    var items=document.getElementById('sumItems');
+    if(!cart.length){ items.innerHTML='<div class="reassure" style="text-align:left">Your bag is empty. <a href="collection.html" style="color:var(--teal)">Shop the vault →</a></div>'; }
+    else items.innerHTML=cart.map(function(it){return '<div class="sitem"><div class="ph"><img src="'+it.img+'" alt=""></div><div><div class="nm">'+it.name+'</div><div class="sub">'+(it.brand||'')+(it.size?' · US '+it.size:'')+'</div></div><div class="pr">'+money(it.price)+'</div></div>';}).join('');
+    var s=sub(), ship = fulfil==='meet'?0:(cart.length?15:0);
+    var total = deposit ? Math.round(s*0.2)+ship : s+ship;
+    document.getElementById('sumSub').textContent=money(s);
+    document.getElementById('sumShip').textContent= fulfil==='meet'?'Free':money(ship);
+    document.getElementById('shipLbl').textContent= fulfil==='meet'?'Meetup':'Shipping';
+    document.getElementById('sumTot').textContent=money(total);
+    document.querySelectorAll('.bag').forEach(function(b){b.innerHTML='BAG · <span class="bag-count">'+cart.length+'</span>';});
+  }
+  document.querySelectorAll('.ftile').forEach(function(t){ t.onclick=function(){
+    document.querySelectorAll('.ftile').forEach(function(x){x.classList.remove('on');}); t.classList.add('on');
+    fulfil=t.dataset.fulfil;
+    document.getElementById('shipFields').style.display = fulfil==='ship'?'block':'none';
+    document.getElementById('meetFields').style.display = fulfil==='meet'?'block':'none';
+    render();
+  };});
+  var dep=document.getElementById('depToggle');
+  dep.onclick=function(){ deposit=!deposit; dep.classList.toggle('on',deposit); render(); };
+  document.getElementById('payBtn').onclick=function(){
+    if(!cart.length){ return; }
+    localStorage.removeItem('oc_cart');
+    document.getElementById('coLive').style.display='none';
+    var msg = fulfil==='meet' ? "We'll text you to lock a Plaza Midwood meetup. Every pair authenticated in hand."
+            : (deposit ? "Deposit received — we're holding the exact pair. Balance due before it ships."
+                       : "Order confirmed — authenticated in hand, out same/next day.");
+    document.getElementById('placedMsg').textContent=msg;
+    document.getElementById('coPlaced').style.display='block';
+    document.querySelectorAll('.bag').forEach(function(b){b.innerHTML='BAG · <span class="bag-count">0</span>';});
+    window.scrollTo(0,0);
+  };
+  render();
+})();
+</script>
+</body>
+</html>
