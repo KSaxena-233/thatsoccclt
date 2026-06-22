@@ -23,7 +23,8 @@
   function render(){
     var n=cart.length, sum=cart.reduce(function(a,b){return a+(+b.price||0);},0);
     document.querySelectorAll('.bag').forEach(function(b){
-      b.innerHTML='BAG · <span class="bag-count">'+n+'</span>';
+      var c=b.querySelector('.bag-count');
+      if(c){ c.textContent=n; } else { b.innerHTML='BAG · <span class="bag-count">'+n+'</span>'; }
       b.classList.remove('pop'); void b.offsetWidth; if(n) b.classList.add('pop');
     });
     if(!n){ itemsEl.innerHTML='<div class="cart-empty">Your bag\'s empty.<br>Go find some heat.</div>'; }
