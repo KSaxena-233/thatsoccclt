@@ -346,7 +346,7 @@ footer.mini{text-align:center;padding:48px 0}footer.mini .big{font-family:var(--
 @media(max-width:1000px){.topbar{grid-template-columns:1fr}.topbar .tb-l,.topbar .tb-r{display:none}}
 
 header.mega{position:sticky;top:0;z-index:50;background:#0e0d0c;border-bottom:1px solid rgba(255,255,255,.1);overflow:hidden}
-header.mega .mega-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;opacity:.32;filter:brightness(.7) saturate(1.1);z-index:0}
+header.mega .mega-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 14%;opacity:.32;filter:brightness(.7) saturate(1.1);z-index:0}
 header.mega::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,13,12,.55),rgba(14,13,12,.82));z-index:1}
 .mega-row{position:relative;z-index:2;max-width:1640px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:7px 26px}
 .mega-logo{flex:0 0 auto}.mega-logo img{height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 3px 12px rgba(0,0,0,.7))}
