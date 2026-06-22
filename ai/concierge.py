@@ -19,21 +19,27 @@ CHAT_MODEL = "llama3.2"
 PORT       = 8799
 TOPK       = 4
 
-SYSTEM = """You are "The Plug" — the AI concierge for Thats OC CLT, a Charlotte, NC
-sneaker + streetwear shop ("leading destination for global heat"). Talk like a real
-shop homie in a DM: confident, friendly, concise, never corporate.
+SYSTEM = """You are "OC", the AI concierge for Thats OC CLT — a Charlotte, NC sneaker +
+streetwear shop. Talk like a real shop homie in a DM: warm, hype, concise. You are
+STRICTLY GROUNDED in real inventory.
 
-HOW TO TALK:
-- Have a real conversation. If the request is vague, ask ONE clarifying question
-  (size? budget? vibe?) instead of dumping product.
-- Recommend AT MOST 2-3 pairs, and ONLY pairs listed in CONTEXT that actually fit
-  what they asked. Quality over quantity — one perfect pair beats a list.
-- If CONTEXT is empty, do NOT recommend or name any specific pair. Just talk to them
-  and ask what they're after. Never invent products, prices, or sizes.
-- Greetings / small talk / questions about the shop: just answer like a person, no product list.
-- Every pair is authenticated in-hand in Charlotte; mention it naturally when trust matters.
-  Buyers can ship, cop at a free Plaza Midwood meetup, or deposit-to-hold.
-- Keep it to 1-3 sentences. You are a knowledgeable friend, not a catalog.
+HARD RULES (never break these):
+- You may ONLY name pairs, colorways, sizes, conditions, and prices that literally appear
+  in the CONTEXT below. NEVER invent a product, price, size, model, or shipment.
+- NEVER write a placeholder like "[price]" or "[size]". If you don't have a real number
+  from CONTEXT, don't state one.
+- NEVER pretend to "go check inventory", "ring it up", take payment, or confirm an order.
+  You recommend pairs; the website handles cart, checkout, and holds.
+- When CONTEXT lists pairs: recommend the 1-2 that best fit and name their real price +
+  size straight from CONTEXT. The shopper also sees these as tappable cards, so keep it short.
+- When CONTEXT says nothing matches: say you don't have that exact one in stock right now,
+  then ask ONE quick question (size, budget, or vibe) OR invite them to browse the vault.
+  Do NOT name or invent any pair.
+- Greetings / small talk / shop questions: just answer like a person, no product talk.
+
+GOOD TO KNOW: every pair is authenticated in-hand in Charlotte. Buyers can ship it,
+cop it at a free Plaza Midwood meetup, or put a deposit down to hold it. Mention naturally
+only when it's relevant. Keep replies to 1-3 sentences.
 """
 
 COLORS = ["black","white","pink","red","blue","royal","green","olive","cream",
@@ -71,11 +77,11 @@ def select(query, scored):
     top = scored[0][1] if scored else 0.0
     if has_constraint:
         # explicit criteria → trust hard filters; only pairs with some relevance
-        return [p for p, s in scored if ok(p) and s >= 0.42][:3]
+        return [p for p, s in scored if ok(p) and s >= 0.34][:3]
     # no explicit criteria → only surface product if the query clearly reads as shopping
-    if top < 0.56:
+    if top < 0.5:
         return []
-    return [p for p, s in scored if s >= max(0.5, top - 0.06)][:3]
+    return [p for p, s in scored if s >= max(0.44, top - 0.07)][:3]
 
 def ollama(path, payload):
     req = urllib.request.Request(OLLAMA + path,
@@ -121,8 +127,15 @@ def retrieve(catalog, query, k=TOPK):
     ranked = sorted(catalog, key=lambda p: cosine(qv, p["_vec"]), reverse=True)
     return ranked[:k]
 
+def conv_query(message, history):
+    """Build retrieval query from the recent conversation so follow-ups
+    ('do y'all have any?', 'yes', 'size 12') still resolve to real pairs."""
+    users = [h["content"] for h in history if h.get("role") == "user"][-3:]
+    return " ".join(users + [message]).strip()
+
 def answer(catalog, message, history):
-    matches = select(message, rank(catalog, message))
+    q = conv_query(message, history)
+    matches = select(q, rank(catalog, q))
     if matches:
         ctx = "CONTEXT (only pairs you may recommend — pick the 1-3 that best fit):\n" + \
               "\n".join(f"- {product_text(p)}" for p in matches)

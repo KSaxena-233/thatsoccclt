@@ -3,7 +3,8 @@
    Talks to the local Ollama-backed server (ai/concierge.py) on :8799. */
 (function(){
   const API  = "http://localhost:8799/chat";
-  const LOGO = "assets/oc-logo.png";
+  const LOGO = "assets/oc-logo.png";   // brand mark (FAB)
+  const AVATAR = "assets/pep.png";     // "OC" concierge mark used inside the chat
 
   const css = `
   .plug-fab{position:fixed;right:22px;bottom:22px;z-index:9000;display:flex;align-items:center;gap:9px;
@@ -142,8 +143,8 @@
   ov.innerHTML = `
     <div class="plug-panel">
       <div class="plug-hd">
-        <div class="lg"><img src="${LOGO}" alt=""></div>
-        <div><div class="nm">The Plug</div><div class="st"><i>AI Concierge</i><i>Live Authenticated Inventory</i></div></div>
+        <div class="lg"><img src="${AVATAR}" alt=""></div>
+        <div><div class="nm">OC · The Plug</div><div class="st"><i>AI Concierge</i><i>Live Authenticated Inventory</i></div></div>
         <button class="x" aria-label="close">×</button>
       </div>
       <div class="plug-body" id="plugBody">
@@ -226,14 +227,14 @@
   function addUser(t){ startChat(); const r=document.createElement('div'); r.className='pl-row me';
     r.innerHTML=`<div class="pl-av me">YO</div><div class="pl-b">${esc(t)}</div>`; body.appendChild(r); bottom(); }
   function addTyping(){ const r=document.createElement('div'); r.className='pl-row bot'; r.id='plugTyping';
-    r.innerHTML=`<div class="pl-av"><img src="${LOGO}"></div><div class="pl-b" style="padding:0"><div class="pl-typing"><span></span><span></span><span></span></div></div>`; body.appendChild(r); bottom(); }
+    r.innerHTML=`<div class="pl-av"><img src="${AVATAR}"></div><div class="pl-b" style="padding:0"><div class="pl-typing"><span></span><span></span><span></span></div></div>`; body.appendChild(r); bottom(); }
   function cards(ps){ if(!ps||!ps.length) return '';
     return `<div class="pl-cards">`+ps.map(p=>`<a class="pl-card" href="product.html">
       <div class="ph"><img src="${p.img}" alt=""></div>
       <div><div class="nm">${esc(p.name)}</div><div class="pr">${money(p.price)}</div>
       <button class="plbag" data-p='${JSON.stringify(p).replace(/'/g,"&#39;")}'>+ bag</button></div></a>`).join('')+`</div>`; }
   function addBot(t,ps){ const r=document.createElement('div'); r.className='pl-row bot';
-    r.innerHTML=`<div class="pl-av"><img src="${LOGO}"></div><div class="pl-b">${esc(t)}${cards(ps)}</div>`; body.appendChild(r); bottom(); }
+    r.innerHTML=`<div class="pl-av"><img src="${AVATAR}"></div><div class="pl-b">${esc(t)}${cards(ps)}</div>`; body.appendChild(r); bottom(); }
 
   async function ask(t){
     if(busy||!t.trim()) return; busy=true;
