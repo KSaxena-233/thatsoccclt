@@ -301,7 +301,7 @@ footer.mini{text-align:center;padding:48px 0}footer.mini .big{font-family:var(--
 .nb{position:relative;aspect-ratio:735/560;border-radius:9px;overflow:hidden;display:block;background:#111}
 .nb img{transition:transform .6s}.nb:hover img{transform:scale(1.06)}
 /* full-bleed bands (lynx / events) */
-.band{display:block;width:100%;margin:34px 0;border-radius:10px;overflow:hidden;line-height:0;position:relative}
+.band{display:block;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:34px;margin-bottom:34px;overflow:hidden;line-height:0;position:relative}
 .band img{width:100%;height:auto;display:block;object-fit:cover}
 .band:hover img{filter:brightness(1.05)}
 /* branded image footer with clickable hotspots */
