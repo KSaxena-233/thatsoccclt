@@ -1,8 +1,8 @@
 {
-  "pid": 39159,
-  "port": 22799,
-  "token": "4f4f8bb5-0a8a-4e57-a057-ed01d2f7567b",
-  "startedAt": "2026-06-22T23:24:02.318Z",
+  "pid": 74983,
+  "port": 31414,
+  "token": "2c2cb5e6-734e-4b30-ab0c-89cdb63c7234",
+  "startedAt": "2026-06-23T04:12:30.920Z",
   "serverPath": "/Users/keshu/.claude/skills/gstack/browse/src/server.ts",
   "mode": "launched"
 }
