@@ -66,7 +66,8 @@
 
   /* -------- HOME featured grid (no sidebar) -------- */
   function renderHome(el){
-    el.innerHTML = catalog.slice(0,8).map(card).join('');
+    var lim = parseInt(el.getAttribute('data-limit')) || 8;
+    el.innerHTML = catalog.slice(0,lim).map(card).join('');
   }
 
   /* -------- COLLECTION sidebar page -------- */
