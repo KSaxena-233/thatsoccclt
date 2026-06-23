@@ -144,7 +144,7 @@
     <div class="plug-panel">
       <div class="plug-hd">
         <div class="lg"><img src="${AVATAR}" alt=""></div>
-        <div><div class="nm">OC · The Plug</div><div class="st"><i>AI Concierge</i><i>Live Authenticated Inventory</i></div></div>
+        <div><div class="nm">The Plug</div><div class="st"><i>AI Concierge</i><i>Live Authenticated Inventory</i></div></div>
         <button class="x" aria-label="close">×</button>
       </div>
       <div class="plug-body" id="plugBody">

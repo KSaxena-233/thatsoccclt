@@ -371,5 +371,6 @@ header.mega::after{content:"";position:absolute;inset:0;background:linear-gradie
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* homepage: 4 neighborhood cards side-by-side, flush under REPPIN banner, gap before Just Landed */
-.nbs.home4{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 0 48px}
-@media(max-width:900px){.nbs.home4{grid-template-columns:repeat(2,1fr);gap:12px;padding-bottom:36px}}
+.nbs.home4{grid-template-columns:repeat(4,1fr);gap:0;padding:0 0 48px}
+.nbs.home4 .nb{border-radius:0}
+@media(max-width:900px){.nbs.home4{grid-template-columns:repeat(2,1fr);padding-bottom:36px}}
